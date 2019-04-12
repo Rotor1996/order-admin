@@ -43,7 +43,7 @@ class Expressage extends Model
     const MONEY_WAY_ELSE_STRING='其他';
     const MONEY_WAY_PAY_ON_DELIVERY_STRING='货到付款';
     protected $fillable = [
-        'clients_id','status', 'courier_name', 'odd_numbers'
+        'clients_id','status', 'courier_name', 'odd_numbers','supervise_teacher'
     ];
     public function client()
     {
@@ -62,6 +62,21 @@ class Expressage extends Model
         ];
     }
     public static function getMoneyWay(){
+        return[
+         self::MONEY_WAY_WECHAT=>self::MONEY_WAY_WECHAT_STRING,
+         self::MONEY_WAY_ALIPAY=>self::MONEY_WAY_ALIPAY_STRING,
+         self::MONEY_WAY_ICBC=>self::MONEY_WAY_ICBC_STRING,
+         self::MONEY_WAY_CCB=>self::MONEY_WAY_CCB_STRING,
+         self::MONEY_WAY_BOC=>self::MONEY_WAY_BOC_STRING,
+         self::MONEY_WAY_CMB=>self::MONEY_WAY_CMB_STRING,
+         self::MONEY_WAY_COMM=>self::MONEY_WAY_COMM_STRING,
+         self::MONEY_WAY_ABC=>self::MONEY_WAY_ABC_STRING,
+         self::MONEY_WAY_PSBC=>self::MONEY_WAY_PSBC_STRING,
+         self::MONEY_WAY_ELSE=>self::MONEY_WAY_ELSE_STRING,
+         self::MONEY_WAY_PAY_ON_DELIVERY=>self::MONEY_WAY_PAY_ON_DELIVERY_STRING,
+        ];
+    }
+    public static function getMoneyEndWay(){
         return[
          self::MONEY_WAY_WECHAT=>self::MONEY_WAY_WECHAT_STRING,
          self::MONEY_WAY_ALIPAY=>self::MONEY_WAY_ALIPAY_STRING,

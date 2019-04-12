@@ -11,7 +11,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use function foo\func;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -152,6 +152,7 @@ class ClientController extends Controller
      */
     protected function form()
     {
+      $data=Auth::guard('admin')->user()->toArray();
         $gender=[
             'on'  => ['value' => 0, 'text' => '女', 'color' => 'danger'],
             'off' => ['value' => 1, 'text' => '男', 'color' => 'primary'],
@@ -171,10 +172,14 @@ class ClientController extends Controller
         $form->date('add_fans_time', '加粉日期')->default(date('Y-m-d'));
         $form->text('source', '来源');
         $form->text('remark','备注');
-        $form->text('service', '归属客服');
+        $form->text('service', '归属客服')->default($data['username']);
+      
+    
         $form->saved(function(Form $form){
+          $data=Auth::guard('admin')->user()->toArray();
                $id = $form->model()->id;
                Expressage::create(['clients_id'=>$id]);
+          return redirect('/admin/order-all?&client%5Bservice%5D='.$data['username']);
         });
         return $form;
 
