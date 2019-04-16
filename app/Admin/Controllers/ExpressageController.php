@@ -198,6 +198,15 @@ class ExpressageController extends Controller
         $form->text('client.remark','备注');
         $form->text('client.service', '归属客服');
       	$form->text('supervise_teacher','督导老师');
+        $form->saved(function(Form $form){
+            $data=Auth::guard('admin')->user()->toArray();
+            $id = $form->model()->clients_id;
+            $money=$form->model()->client->money;
+            $money_end_way=$form->model()->client->money_end_way;
+            $sum=$money+$money_end_way;
+            Expressage::where('clients_id',$id)->update(['sum'=>$sum]);
+            return redirect('/admin/order-all');
+        });
         return $form;
     }
 }
