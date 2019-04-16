@@ -178,7 +178,10 @@ class ClientController extends Controller
         $form->saved(function(Form $form){
           $data=Auth::guard('admin')->user()->toArray();
                $id = $form->model()->id;
-               Expressage::create(['clients_id'=>$id]);
+               $money=$form->model()->money;
+               $money_end_way=$form->model()->money_end_way;
+               $sum=$money+$money_end_way;
+               Expressage::create(['clients_id'=>$id,'sum'=>$sum]);
           return redirect('/admin/order-all?&client%5Bservice%5D='.$data['username']);
         });
         return $form;

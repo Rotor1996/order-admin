@@ -43,7 +43,7 @@ class Expressage extends Model
     const MONEY_WAY_ELSE_STRING='其他';
     const MONEY_WAY_PAY_ON_DELIVERY_STRING='货到付款';
     protected $fillable = [
-        'clients_id','status', 'courier_name', 'odd_numbers','supervise_teacher'
+        'clients_id','sum','status', 'courier_name', 'odd_numbers','supervise_teacher'
     ];
     public function client()
     {
